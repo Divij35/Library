@@ -6,10 +6,11 @@ require('dotenv').config();
 const app = express();
 const PORT = 5000;
 
-// Allow requests from the frontend origin
-app.use(cors({
-  origin: 'http://localhost:5173',
-}));
+const corsOptions = {
+  origin: process.env.VITE_URI.replace(/\/$/, "")
+};
+
+app.use(cors(corsOptions));
 
 app.get('/api/books', async (req, res) => {
   const { query } = req.query;

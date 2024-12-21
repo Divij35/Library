@@ -1,26 +1,8 @@
 {
-    "version": 2,
-    "projects": {
-      "frontend": {
-        "src": "frontend/",
-        "buildCommand": "npm run build",
-        "outputDirectory": "frontend/build"
-      },
-      "backend": {
-        "src": "backend/",
-        "buildCommand": "npm start",
-        "outputDirectory": "backend"
-      }
-    },
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/backend/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/frontend/$1"
-      }
-    ]
-  }
-  
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

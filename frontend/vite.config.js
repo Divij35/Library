@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env.VITE_BACKEND_URL': JSON.stringify(env.VITE_BACKEND_URL),
     },
+    base: "/",
     plugins: [react()],
   };
 });
