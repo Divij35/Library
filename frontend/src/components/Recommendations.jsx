@@ -24,7 +24,6 @@ const Recommendations = ({ category, author }) => {
 
         const response = await fetchBooks(query);
         setRecommendations(response)
-        console.log(response)
       } catch (err) {
         setError(err.message);
       } finally {
