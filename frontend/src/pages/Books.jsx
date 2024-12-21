@@ -6,11 +6,11 @@ const Books = () => {
   const { favorites } = useFavorites();
 
   if (favorites.length === 0) {
-    return <p className="text-gray-500 m-2">No favorite books added yet.</p>;
+    return <p className="text-gray-500 m-2 h-[80vh]">No favorite books added yet.</p>;
   }
 
   return (
-    <div className="m-8">
+    <div className="m-8  h-[80vh]">
       <h2 className="text-xl font-semibold mb-4">Favorite Books</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {favorites.map((book) => (

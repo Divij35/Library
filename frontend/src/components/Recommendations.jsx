@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { getImageURL } from "../utlis/image-utlis";
 import { Link, useNavigate } from "react-router-dom";
+import { fetchBooks } from "../Services/fetchBooks"
 
 const Recommendations = ({ category, author }) => {
     const navigate = useNavigate();
@@ -21,16 +22,9 @@ const Recommendations = ({ category, author }) => {
         if (author) queries.push(`inauthor:${author}`);
         const query = queries.join("+");
 
-        const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=6`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch recommendations.");
-        }
-
-        const data = await response.json();
-        setRecommendations(data.items || []);
+        const response = await fetchBooks(query);
+        setRecommendations(response)
+        console.log(response)
       } catch (err) {
         setError(err.message);
       } finally {
@@ -40,6 +34,7 @@ const Recommendations = ({ category, author }) => {
 
     fetchRecommendations();
   }, [category, author]);
+
 
   if (loading) return <Loading />;
   if (error) {

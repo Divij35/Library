@@ -4,6 +4,7 @@ import Loading from "../components/Loading";
 import { getImageURL } from "../utlis/image-utlis";
 import Recommendations from "../components/Recommendations";
 import { useFavorites } from "../context/FavoritesContext";
+import { fetchBooks } from "../Services/fetchBooks";
 
 const Detail = () => {
   const { id } = useParams();
@@ -14,9 +15,7 @@ const Detail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes/${id}`
-        );
+        const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch book details.");
         }
@@ -101,8 +100,7 @@ const Detail = () => {
             <h2 className="text-xl font-semibold">Details</h2>
             <ul className="list-disc ml-5 mt-2 text-gray-600">
               <li>
-                <strong>Author(s):</strong>{" "}
-                {authors ? authors.join(", ") : "Unknown"}
+                <strong>Author(s):</strong> {authors ? authors.join(", ") : "Unknown"}
               </li>
               <li>
                 <strong>Publisher:</strong> {publisher || "Unknown"}
@@ -111,8 +109,7 @@ const Detail = () => {
                 <strong>Published Date:</strong> {publishedDate || "Unknown"}
               </li>
               <li>
-                <strong>Categories:</strong>{" "}
-                {categories ? categories.join(", ") : "None"}
+                <strong>Categories:</strong> {categories ? categories.join(", ") : "None"}
               </li>
             </ul>
           </div>
@@ -124,7 +121,7 @@ const Detail = () => {
               </li>
               {buyLink && (
                 <li>
-                  <strong>Buy Link:</strong>{" "}
+                  <strong>Buy Link:</strong>
                   <a
                     href={buyLink}
                     target="_blank"
